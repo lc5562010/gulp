@@ -57,6 +57,17 @@ gulp是基于node的，但是它并没有直接使用node中fs模块里的文件
 与原生的fs相同，vinyl使用管道也是用pipe方法。 pipe接受一个函数为参数，将当前流的内容传给这个函数让其加工，vinyl把流的内容封装得更加简明好用， 而且，对于调用一次pipe方法，其传入的函数会对这个流的所有文件作用，换句话说，==传入pipe方法的函数实际上是针对一个文件的， 而流中所有的文件都会被这个函数加工一下==。这么看，vinyl的流有些并行的感觉，但本质上说javascript是单线程的， 加工的过程还是一个接着一个进行的，所以说成让文件一个接一个地流过某个管道更确切。==不过处理流的代码是异步的==。
 
 ---
+#### 全新的任务执行体系
+- gulp.series 用于串行（顺序）执行
+- gulp.parallel 用于并行执行
+```
+gulp.task('default',
+  gulp.series('clean', gulp.parallel('scripts', 'styles'),
+  function() {...}));
+```
+
 参考链接
 - [gulp的流与执行顺序](https://www.cnblogs.com/wyaocn/p/5804342.html)
 - [Gulp 基础与原理](https://segmentfault.com/a/1190000008513154)
+- [Gulp资料大全：入门、插件、包等，已完结。](https://github.com/Pines-Cheng/awesome-gulp-cn#gulp-4-%E5%85%A5%E9%97%A8)
+- [Gulp 4: gulp.parallel gulp.series -- 全新的任务执行体系](https://blog.csdn.net/weixin_33722405/article/details/88705249)
